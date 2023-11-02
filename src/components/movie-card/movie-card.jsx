@@ -1,11 +1,12 @@
 // Here you import the PropTypes librarymovie
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
+import "./movie-card.scss";
 
 // The MovieCard function component
 export const MovieCard = ({ movie, onMovieClick }) => {
   return (
-    <Card>
+    <Card className="h-100">
       <Card.Img variant="top" src={movie.ImagePath} />
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
@@ -22,7 +23,7 @@ export const MovieCard = ({ movie, onMovieClick }) => {
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
-    ImagePath: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired
   }).isRequired,
   onMovieClick: PropTypes.func.isRequired
 };
