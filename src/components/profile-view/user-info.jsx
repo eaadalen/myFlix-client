@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserInfo ({ email, name }) {
+function UserInfo ({ name, email }) {
     return (
         <>
             <p>User: {name}</p>

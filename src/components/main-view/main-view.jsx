@@ -31,7 +31,6 @@ export const MainView = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setMovies(data);
       });
   }, [token]);
@@ -49,7 +48,6 @@ export const MainView = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setProfiles(data);
       });
   }, [token]);
