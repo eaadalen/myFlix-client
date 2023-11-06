@@ -6,14 +6,14 @@ import UpdateUser from "./update-user";
 import { useState, useEffect } from "react";
 
 export const ProfileView = ({ profiles }) => {
-  const { profileId } = useParams();
-  const profile = profiles.find((b) => b._id === profileId);
+  const { userID } = useParams();
+  const profile = profiles.find((b) => b._id === userID);
   const [user, setUser] = useState({
     Username: "",
     Email: "",
     FavoriteMovies: []
   })
-  const favoriteMovieList = movies.filter((movies) => {
+  const favoriteMovieList = profile.FavoriteMovies.filter((movies) => {
     return user.FavoriteMovies.includes(movies._id);
   })
   const getUser = () => {
@@ -36,11 +36,15 @@ export const ProfileView = ({ profiles }) => {
     }
   }, [])
 
+  /*
+  <UpdateUser handleSubmit={handleSubmit} handleUpdate={handleUpdate}/>
+  */
+
   return (
     <div>
       <UserInfo name={profile.Username} email={profile.Email}/>
-      <FavoriteMovies favoriteMovieList={favoriteMovieList}/>
-      <UpdateUser handleSubmit={handleSubmit} handleUpdate={handleUpdate}/>
+      <FavoriteMovies favoriteMovieList={profile.FavoriteMovies}/>
+      
       <Link to={`/`}>
         <button className="back-button">Back</button>
       </Link>
