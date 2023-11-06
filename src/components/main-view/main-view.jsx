@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+import { ProfileView } from "../profile-view/profile-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
@@ -14,6 +15,7 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
+  const [profiles, setProfiles] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
@@ -31,6 +33,24 @@ export const MainView = () => {
       .then((data) => {
         console.log(data);
         setMovies(data);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
+
+    fetch(
+      "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/users",
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setProfiles(data);
       });
   }, [token]);
 

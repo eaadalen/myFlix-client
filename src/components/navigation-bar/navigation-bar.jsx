@@ -10,7 +10,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          Books App
+          Movies Database
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -30,6 +30,9 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                 <Nav.Link as={Link} to="/">
                   Home
                 </Nav.Link>
+                <Nav.Link as={Link} to={`/profile/${encodeURIComponent(user._id)}`}>
+                  Profile
+                </Nav.Link>
                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
               </>
             )}
@@ -48,6 +51,3 @@ const App = () => {
   );
 }
 
-const container = document.querySelector("#root");
-const root = createRoot(container);
-root.render(<App />);
