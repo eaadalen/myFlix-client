@@ -5,16 +5,17 @@ import { Link } from "react-router-dom";
 function FavoriteMovies ({ favoriteMovieList }) {
     const storedToken = localStorage.getItem("token");
     const [token, setToken] = useState(storedToken ? storedToken : null);
-    function findMovie(movieName) {
-        console.log(movieName);
+    function findMovie(movieID) {
+        console.log(movieID);
         fetch(
-          "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/movies/" + String(movieName),
+          "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/movies/" + String(movieID),
           {
             headers: { Authorization: `Bearer ${token}` }
           }
         )
           .then((response) => response.json())
           .then((data) => {
+            console.log("here");
             console.log(data);
             return data;
           });
@@ -23,8 +24,7 @@ function FavoriteMovies ({ favoriteMovieList }) {
         <div>
             <h2>Favorite Movies</h2>
             {favoriteMovieList.map((movies) => {
-                let test = findMovie(movies);
-                console.log(test);
+                console.log(findMovie(movies));
                 return (
                     <div key={movies._id}>
                         <img src={movies.ImagePath}/>

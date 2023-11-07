@@ -40733,13 +40733,14 @@ function FavoriteMovies({ favoriteMovieList }) {
     _s();
     const storedToken = localStorage.getItem("token");
     const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
-    function findMovie(movieName) {
-        console.log(movieName);
-        fetch("https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/movies/" + String(movieName), {
+    function findMovie(movieID) {
+        console.log(movieID);
+        fetch("https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/movies/" + String(movieID), {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }).then((response)=>response.json()).then((data)=>{
+            console.log("here");
             console.log(data);
             return data;
         });
@@ -40750,12 +40751,11 @@ function FavoriteMovies({ favoriteMovieList }) {
                 children: "Favorite Movies"
             }, void 0, false, {
                 fileName: "src/components/profile-view/favorite-movies.jsx",
-                lineNumber: 24,
+                lineNumber: 25,
                 columnNumber: 13
             }, this),
             favoriteMovieList.map((movies)=>{
-                let test = findMovie(movies);
-                console.log(test);
+                console.log(findMovie(movies));
                 return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
@@ -40798,7 +40798,7 @@ function FavoriteMovies({ favoriteMovieList }) {
         ]
     }, void 0, true, {
         fileName: "src/components/profile-view/favorite-movies.jsx",
-        lineNumber: 23,
+        lineNumber: 24,
         columnNumber: 9
     }, this);
 }
