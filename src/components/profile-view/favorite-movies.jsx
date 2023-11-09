@@ -2,11 +2,17 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+
+
 function FavoriteMovies ({ favoriteMovieList }) {
     const storedToken = localStorage.getItem("token");
     const [token, setToken] = useState(storedToken ? storedToken : null);
+    const [movie, setMovie] = useState([]);
     function findMovie(movieID) {
-        console.log(movieID);
+      useEffect(() => {
+        if (!token) {
+          return;
+        }
         fetch(
           "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/movies/" + String(movieID),
           {
@@ -15,16 +21,20 @@ function FavoriteMovies ({ favoriteMovieList }) {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log("here");
-            console.log(data);
-            return data;
+            setMovie(data);
           });
+        }, [token]);
       }
+    
+    //findMovie("6525b63873a4245ce9d38637");
+    //console.log(movie);
+
     return (
         <div>
             <h2>Favorite Movies</h2>
             {favoriteMovieList.map((movies) => {
-                console.log(findMovie(movies));
+                findMovie(movies);
+                console.log(movie);
                 return (
                     <div key={movies._id}>
                         <img src={movies.ImagePath}/>
