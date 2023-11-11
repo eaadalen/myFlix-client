@@ -23,6 +23,7 @@ export const ProfileView = ({ movies }) => {
 		}).then((response) => {
 			if (response.ok) {
 				setUser(null);
+        localStorage.clear();
 				alert("Your account has been deleted");
 			} else {
 				alert("Account deletion failed")
