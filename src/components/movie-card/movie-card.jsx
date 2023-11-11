@@ -10,13 +10,15 @@ export const MovieCard = ({ movie }) => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const storedToken = localStorage.getItem("token");
   const [token, setToken] = useState(storedToken ? storedToken : null);
-  const test = (name) => {
-		console.log(name);
-	}
+  /*var present = false;
   const toggleFavorite = () => {
-		user.FavoriteMovies.forEach(test());
+    for (let i = 0; i < (user.FavoriteMovies.length); i++) {
+      if (movie._id == user.FavoriteMovies[i]) {
+        present = true;
+      }
+    }
 	}
-  toggleFavorite();
+  toggleFavorite();*/
   const addFavorite = () => {
 		fetch(
       "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/users/" + String(user.Username) + "/movies/" + String(movie._id),
@@ -49,21 +51,38 @@ export const MovieCard = ({ movie }) => {
 			}
 		})
 	}
-  return (
-    <Card className="h-100">
-      <Card.Img variant="top" src={movie.ImagePath} />
-      <Card.Body>
-        <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Director.Name}</Card.Text>
-        <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-          <Button variant="link">Open</Button>
-        </Link>
-        <button className="favorites" onClick={addFavorite}>Add to Favorites</button>
-        <button className="favorites" onClick={removeFavorite}>Remove from Favorites</button>
-      </Card.Body>
-    </Card>
-  );
-};
+  //if (present == true) {
+    return (
+      <Card className="h-100">
+        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Text>{movie.Director.Name}</Card.Text>
+          <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+            <Button variant="link">Open</Button>
+          </Link>
+          <button id="add" className="favorites" onClick={addFavorite}>Add to Favorites</button>
+          <button id="remove" className="favorites" onClick={removeFavorite}>Remove from Favorites</button>
+        </Card.Body>
+      </Card>
+    );
+  }
+  /*else {
+    return (
+      <Card className="h-100">
+        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Text>{movie.Director.Name}</Card.Text>
+          <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+            <Button variant="link">Open</Button>
+          </Link>
+          <button id="add" className="favorites" onClick={addFavorite}>Add to Favorites</button>
+        </Card.Body>
+      </Card>
+    );
+  }
+}*/
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({

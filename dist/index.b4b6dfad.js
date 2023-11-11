@@ -27196,14 +27196,15 @@ const MovieCard = ({ movie })=>{
     const [user, setUser] = (0, _react.useState)(storedUser ? storedUser : null);
     const storedToken = localStorage.getItem("token");
     const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
-    const test = (name)=>{
-        console.log(name);
-    };
-    const toggleFavorite = ()=>{
-        user.FavoriteMovies.forEach(test());
-    };
-    toggleFavorite();
-    const addFavorite = ()=>{
+    /*var present = false;
+  const toggleFavorite = () => {
+    for (let i = 0; i < (user.FavoriteMovies.length); i++) {
+      if (movie._id == user.FavoriteMovies[i]) {
+        present = true;
+      }
+    }
+	}
+  toggleFavorite();*/ const addFavorite = ()=>{
         fetch("https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/users/" + String(user.Username) + "/movies/" + String(movie._id), {
             method: "POST",
             headers: {
@@ -27225,6 +27226,7 @@ const MovieCard = ({ movie })=>{
             else alert("Failed to remove " + String(movie.Title) + " from favorites");
         });
     };
+    //if (present == true) {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
         className: "h-100",
         children: [
@@ -27233,8 +27235,8 @@ const MovieCard = ({ movie })=>{
                 src: movie.ImagePath
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 54,
-                columnNumber: 7
+                lineNumber: 57,
+                columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
                 children: [
@@ -27242,15 +27244,15 @@ const MovieCard = ({ movie })=>{
                         children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 56,
-                        columnNumber: 9
+                        lineNumber: 59,
+                        columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movie.Director.Name
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 57,
-                        columnNumber: 9
+                        lineNumber: 60,
+                        columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                         to: `/movies/${encodeURIComponent(movie._id)}`,
@@ -27259,48 +27261,65 @@ const MovieCard = ({ movie })=>{
                             children: "Open"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 59,
-                            columnNumber: 11
+                            lineNumber: 62,
+                            columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 58,
-                        columnNumber: 9
+                        lineNumber: 61,
+                        columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        id: "add",
                         className: "favorites",
                         onClick: addFavorite,
                         children: "Add to Favorites"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 61,
-                        columnNumber: 9
+                        lineNumber: 64,
+                        columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        id: "remove",
                         className: "favorites",
                         onClick: removeFavorite,
                         children: "Remove from Favorites"
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 62,
-                        columnNumber: 9
+                        lineNumber: 65,
+                        columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 55,
-                columnNumber: 7
+                lineNumber: 58,
+                columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 53,
-        columnNumber: 5
+        lineNumber: 56,
+        columnNumber: 7
     }, undefined);
 };
 _s(MovieCard, "ic24/bxaqjOSLlAVt1ybqWm/Vvg=");
 _c = MovieCard;
-MovieCard.propTypes = {
+/*else {
+    return (
+      <Card className="h-100">
+        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Body>
+          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Text>{movie.Director.Name}</Card.Text>
+          <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
+            <Button variant="link">Open</Button>
+          </Link>
+          <button id="add" className="favorites" onClick={addFavorite}>Add to Favorites</button>
+        </Card.Body>
+      </Card>
+    );
+  }
+}*/ MovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
         Title: (0, _propTypesDefault.default).string.isRequired,
         ImagePath: (0, _propTypesDefault.default).string.isRequired
@@ -27314,7 +27333,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","prop-types":"7wKI2","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"c2QuD","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eGy0C","./movie-card.scss":"d6HH4"}],"7wKI2":[function(require,module,exports) {
+},{"react":"21dqq","prop-types":"7wKI2","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"c2QuD","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"eGy0C","./movie-card.scss":"d6HH4","react/jsx-dev-runtime":"iTorj"}],"7wKI2":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -41000,8 +41019,8 @@ const ProfileView = ({ movies })=>{
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                             to: "/login",
-                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
-                                className: "delete",
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                className: "delete-button",
                                 onClick: handleDelete,
                                 children: "Delete Account"
                             }, void 0, false, {
@@ -41196,9 +41215,8 @@ const LoginView = ({ onLoggedIn })=>{
                 lineNumber: 58,
                 columnNumber: 7
             }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
-                variant: "primary",
-                type: "submit",
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                className: "update-button",
                 children: "Submit"
             }, void 0, false, {
                 fileName: "src/components/login-view/login-view.jsx",

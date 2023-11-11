@@ -1,22 +1,14 @@
 .favorites {
   color: #f5f5f5;
-  background-color: #1e90ff;
+  background-color: #07ad07;
   border: none;
   border-radius: 4px;
   padding: 4px 12px;
 }
 
-.back-button {
+.back-button, .update-button, .delete-button {
   color: #f5f5f5;
-  background-color: #1e90ff;
-  border: none;
-  border-radius: 4px;
-  padding: 4px 12px;
-}
-
-.update-button {
-  color: #f5f5f5;
-  background-color: #871eff;
+  background-color: #07ad07;
   border: none;
   border-radius: 4px;
   padding: 4px 12px;

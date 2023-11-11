@@ -44,7 +44,7 @@ export const ProfileView = ({ movies }) => {
         </Col>
         <Col>
           <Link to={"/login"}>
-            <Button className="delete" onClick={handleDelete}>Delete Account</Button>
+            <button className="delete-button" onClick={handleDelete}>Delete Account</button>
           </Link>
         </Col>
       </Row>
