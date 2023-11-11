@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -23,8 +23,6 @@ export const ProfileView = ({ movies }) => {
 		}).then((response) => {
 			if (response.ok) {
 				setUser(null);
-        setToken(null);
-        localStorage.clear();
 				alert("Your account has been deleted");
 			} else {
 				alert("Account deletion failed")

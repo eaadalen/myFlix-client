@@ -1,5 +1,3 @@
-import {createRoot} from "react-dom/client";
-import {MainView} from "../main-view/main-view";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -42,12 +40,3 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
     </Navbar>
   );
 };
-
-const App = () => {
-  return (
-    <Container>
-      <MainView />
-    </Container>
-  );
-}
-

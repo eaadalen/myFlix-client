@@ -8,9 +8,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../movie-view/movie-view.scss";
 
-export const UpdateView = ({ profiles }) => {
-  const { userID } = useParams();
-  const user = profiles.find((b) => b._id === userID);
+export const UpdateView = ({ user }) => {
   const storedToken = localStorage.getItem("token");
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [username, setUsername] = useState("");

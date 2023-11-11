@@ -16,7 +16,6 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
-  const [profiles, setProfiles] = useState([]);
 
   useEffect(() => {
     if (!token) {
@@ -32,23 +31,6 @@ export const MainView = () => {
       .then((response) => response.json())
       .then((data) => {
         setMovies(data);
-      });
-  }, [token]);
-
-  useEffect(() => {
-    if (!token) {
-      return;
-    }
-
-    fetch(
-      "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/users",
-      {
-        headers: { Authorization: `Bearer ${token}` }
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setProfiles(data);
       });
   }, [token]);
 
@@ -126,7 +108,7 @@ export const MainView = () => {
                   <Navigate to="/login" replace />
                 ) : (
                   <Col md={8}>
-                    <UpdateView profiles={profiles}/>
+                    <UpdateView user={user}/>
                   </Col>
                 )}
               </>
