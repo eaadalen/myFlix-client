@@ -51,7 +51,12 @@ export const MainView = () => {
               <>
                 {!user ? (<Navigate to="/login" replace />) : (
                   <Col md={8}>
-                    <ProfileView movies={movies} user={user}/>
+                    <ProfileView 
+                      user={user} 
+                      token={token} 
+                      setUser={setUser} 
+                      movies={movies}
+                    />
                   </Col>
                 )}
               </>
@@ -95,7 +100,10 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                    <LoginView onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }} />
                   </Col>
                 )}
               </>
@@ -127,7 +135,12 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-4" key={movie._id} md={3}>
-                        <MovieCard movie={movie} />
+                        <MovieCard 
+                          movie={movie}
+                          token={token}
+                          setUser={setUser}
+                          user={user} 
+                        />
                       </Col>
                     ))}
                   </>

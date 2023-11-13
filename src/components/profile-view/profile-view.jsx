@@ -1,16 +1,14 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { React, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { MovieCard } from "../movie-card/movie-card";
 
-export const ProfileView = ({ user, movies }) => {
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-  const [user, setUser] = useState(storedUser ? storedUser : null);
-  const storedToken = localStorage.getItem("token");
-  const [token, setToken] = useState(storedToken ? storedToken : null);
-  const favMov = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
+export const ProfileView = ({ user, token, movies, setUser }) => {
+  const [username, setName] = useState(user.Username);
+  const [email, setEmail] = useState(user.Email);
+  let favMov = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
   const handleDelete = () => {
 		fetch(
       "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/users/" + String(user.Username),
@@ -33,8 +31,8 @@ export const ProfileView = ({ user, movies }) => {
     <Container>
       <Row>
         <h3 className="profile-title">User Info</h3>
-        <span>Username: {user.Username}</span>
-        <span>Email: {user.Email}</span>
+        <span>Username: {username}</span>
+        <span>Email: {email}</span>
       </Row>
       <Row>
         <Col className="mb-2" md={3}>
@@ -53,7 +51,12 @@ export const ProfileView = ({ user, movies }) => {
         {favMov.map((movie) => {
           return (
             <Col className="mb-3" key={movie._id} md={4}>
-              <MovieCard movie={movie}/>
+              <MovieCard 
+                movie={movie}
+                token={token}
+                setUser={setUser}
+                user={user}
+              />
             </Col>
           );
         })}
