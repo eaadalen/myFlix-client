@@ -14,9 +14,10 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 			headers: {
 				Authorization: `Bearer ${token}`
 			}
-		}).then((response) => {
+		}).then(async(response) => {
 			if (response.ok) {
-        setUser(user);
+        const data = await response.json();
+        setUser(data);
 				alert(String(movie.Title) + " added to favorites");
 			} else {
 				alert("Failed to add " + String(movie.Title) + " to favorites");
@@ -31,9 +32,10 @@ export const MovieCard = ({ movie, token, setUser, user }) => {
 			headers: {
 				Authorization: `Bearer ${token}`
 			}
-		}).then((response) => {
+		}).then(async(response) => {
 			if (response.ok) {
-        setUser(user);
+        const data = await response.json();
+        setUser(data);
 				alert(String(movie.Title) + " removed from favorites");
 			} else {
 				alert("Failed to remove " + String(movie.Title) + " from favorites");

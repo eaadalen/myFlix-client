@@ -6,8 +6,6 @@ import Row from "react-bootstrap/Row";
 import { MovieCard } from "../movie-card/movie-card";
 
 export const ProfileView = ({ user, token, movies, setUser }) => {
-  const [username, setName] = useState(user.Username);
-  const [email, setEmail] = useState(user.Email);
   let favMov = movies.filter((movie) => user.FavoriteMovies.includes(movie._id));
   const handleDelete = () => {
 		fetch(
@@ -31,8 +29,8 @@ export const ProfileView = ({ user, token, movies, setUser }) => {
     <Container>
       <Row>
         <h3 className="profile-title">User Info</h3>
-        <span>Username: {username}</span>
-        <span>Email: {email}</span>
+        <span>Username: {user.Username}</span>
+        <span>Email: {user.Email}</span>
       </Row>
       <Row>
         <Col className="mb-2" md={3}>
