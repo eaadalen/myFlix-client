@@ -40,6 +40,7 @@ export const MainView = () => {
           user={user}
           onLoggedOut={() => {
             setUser(null);
+            localStorage.clear();
           }}
         />
       <Row className="justify-content-md-center">
@@ -50,7 +51,7 @@ export const MainView = () => {
               <>
                 {!user ? (<Navigate to="/login" replace />) : (
                   <Col md={8}>
-                    <ProfileView movies={movies}/>
+                    <ProfileView movies={movies} user={user}/>
                   </Col>
                 )}
               </>

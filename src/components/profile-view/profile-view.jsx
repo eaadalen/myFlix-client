@@ -4,9 +4,8 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { MovieCard } from "../movie-card/movie-card";
-import Button from "react-bootstrap/Button";
 
-export const ProfileView = ({ movies }) => {
+export const ProfileView = ({ user, movies }) => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const storedToken = localStorage.getItem("token");
