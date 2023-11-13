@@ -11,8 +11,8 @@ import Row from "react-bootstrap/Row";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
-  console.log(localStorage);
-  //const storedUser = JSON.parse(localStorage.getItem("user"));
+  console.log(localStorage.getItem("user"));
+  const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
@@ -41,11 +41,68 @@ export const MainView = () => {
           user={user}
           onLoggedOut={() => {
             setUser(null);
+            setToken(null);
             localStorage.clear();
           }}
         />
       <Row className="justify-content-md-center">
         <Routes>
+          <Route
+            path="/signup"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5}>
+                    <SignupView />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                {user ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5}>
+                    <LoginView onLoggedIn={(user, token) => {
+                        setUser(user);
+                        setToken(token);
+                      }} />
+                  </Col>
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <>
+                {!user ? (
+                  <Navigate to="/login" replace />
+                ) : movies.length === 0 ? (
+                  <Col>The list is empty!</Col>
+                ) : (
+                  <>
+                    {movies.map((movie) => (
+                      <Col className="mb-4" key={movie._id} md={3}>
+                        <MovieCard 
+                          movie={movie}
+                          token={token}
+                          setUser={setUser}
+                          user={user} 
+                        />
+                      </Col>
+                    ))}
+                  </>
+                )}
+              </>
+            }
+          />
           <Route
             path="/profile/:userID"
             element={
@@ -80,37 +137,6 @@ export const MainView = () => {
             }
           />
           <Route
-            path="/signup"
-            element={
-              <>
-                {user ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Col md={5}>
-                    <SignupView />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <>
-                {user ? (
-                  <Navigate to="/" />
-                ) : (
-                  <Col md={5}>
-                    <LoginView onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                      }} />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
             path="/profile/:userID/updateinfo"
             element={
               <>
@@ -120,31 +146,6 @@ export const MainView = () => {
                   <Col md={8}>
                     <UpdateView user={user}/>
                   </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <>
-                {!user ? (
-                  <Navigate to="/login" replace />
-                ) : movies.length === 0 ? (
-                  <Col>The list is empty!</Col>
-                ) : (
-                  <>
-                    {movies.map((movie) => (
-                      <Col className="mb-4" key={movie._id} md={3}>
-                        <MovieCard 
-                          movie={movie}
-                          token={token}
-                          setUser={setUser}
-                          user={user} 
-                        />
-                      </Col>
-                    ))}
-                  </>
                 )}
               </>
             }
