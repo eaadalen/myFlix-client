@@ -6,6 +6,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { UpdateView } from "../profile-view/update-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
+import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -16,6 +17,8 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
+  const [filter, setFilter] = useState([]);
+  const filteredMovies = movies.filter((movie) => movie.Title.toLowerCase().includes(filter));
 
   useEffect(() => {
     if (!token) {
@@ -87,7 +90,13 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
+                    <Form.Control
+                      type="text"
+                      placeholder="Search..."
+                      value={filter}
+                      onChange={ (e) => setFilter(e.target.value)}
+                    />
+                    {filteredMovies.map((movie) => (
                       <Col className="mb-4" key={movie._id} md={3}>
                         <MovieCard 
                           movie={movie}
