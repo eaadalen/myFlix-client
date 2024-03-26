@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-export const SignupView = () => {
+export const SignupView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -28,16 +28,24 @@ export const SignupView = () => {
         }
       }
     )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.user) {
-          localStorage.setItem("user", JSON.stringify(data.user));
-          localStorage.setItem("token", data.token);
-          onLoggedIn(data.user, data.token);
-        } else {
-          alert("No such user");
-        }
+      .then((responseV1) => responseV1.json())
+      .then((dataV1) => {
+        fetch(
+          "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/login?Username=" + String(data.Username) + "&Password=" + String(data.Password),
+          {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }
+        )
+        .then((responseV2) => responseV2.json())
+        .then((dataV2) => {
+          localStorage.setItem("user", JSON.stringify(dataV2.user));
+          localStorage.setItem("token", dataV2.token);
+          onLoggedIn(dataV2.user, dataV2.token);
+        });
       })
       .catch((e) => {
         alert("Something went wrong");
