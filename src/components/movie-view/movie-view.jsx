@@ -7,7 +7,6 @@ import Col from "react-bootstrap/Col";
 
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
-  console.log(movieId);
   const movie = movies.find((b) => b._id === movieId);
 
   return (
@@ -26,6 +25,8 @@ export const MovieView = ({ movies }) => {
       <Link to={`/`}>
         <button className="back-button">Back</button>
       </Link>
+      <Button onClick={addFavorite}>Add to Favorites</Button>
+      <Button onClick={removeFavorite}>Remove from Favorites</Button>
     </div>
   );
 };
