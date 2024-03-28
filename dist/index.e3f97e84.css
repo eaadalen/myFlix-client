@@ -6,7 +6,7 @@
   padding: 4px 12px;
 }
 
-.back-button, .update-button, .delete-button {
+.back-button, .update-button, .delete-button, .favorites {
   color: #f5f5f5;
   background-color: #07ad07;
   border: none;

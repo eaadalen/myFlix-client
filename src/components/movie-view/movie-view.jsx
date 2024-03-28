@@ -8,7 +8,42 @@ import Col from "react-bootstrap/Col";
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
   const movie = movies.find((b) => b._id === movieId);
-
+  const addFavorite = () => {
+		fetch(
+      "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/users/" + String(user.Username) + "/movies/" + String(movie._id),
+      {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		}).then(async(response) => {
+			if (response.ok) {
+        const data = await response.json();
+        setUser(data);
+				alert(String(movie.Title) + " added to favorites");
+			} else {
+				alert("Failed to add " + String(movie.Title) + " to favorites");
+			}
+		})
+	}
+  const removeFavorite = () => {
+		fetch(
+      "https://desolate-everglades-87695-c2e8310ae46d.herokuapp.com/users/" + String(user.Username) + "/favorites/" + String(movie._id),
+      {
+			method: "DELETE",
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		}).then(async(response) => {
+			if (response.ok) {
+        const data = await response.json();
+        setUser(data);
+				alert(String(movie.Title) + " removed from favorites");
+			} else {
+				alert("Failed to remove " + String(movie.Title) + " from favorites");
+			}
+		})
+	}
   return (
     <div>
       <div>
@@ -25,8 +60,8 @@ export const MovieView = ({ movies }) => {
       <Link to={`/`}>
         <button className="back-button">Back</button>
       </Link>
-      <Button onClick={addFavorite}>Add to Favorites</Button>
-      <Button onClick={removeFavorite}>Remove from Favorites</Button>
+      <button id="add" className="favorites" onClick={addFavorite}>Add to Favorites</button>
+      <button id="remove" className="favorites" onClick={removeFavorite}>Remove from Favorites</button>
     </div>
   );
 };
